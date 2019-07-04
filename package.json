@@ -1,0 +1,28 @@
+{
+  "name": "ciclos-pagamentos-backend",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon",
+    "production": "pm2 start src/server.js --name ciclos-pagamentos-backend"
+  },
+  "author": {
+    "name": "Giuliano Bortoloni",
+    "email": "giulianoagria@hotmail.com"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-query-int": "^3.0.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.6.2",
+    "mongoose-paginate": "^5.0.3",
+    "pm2": "^3.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
