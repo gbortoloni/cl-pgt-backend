@@ -24,7 +24,7 @@ const login = (req, res, next) => {
     } else if (user && bcrypt.compareSync(password, user.password)) {
       const token = jwt.sign(
         { name: user.name, email: user.email },
-        env.authSecret,
+        process.env.AUTH_SECRET ? process.env.AUTH_SECRET : env.authSecret,
         {
           expiresIn: "1 day"
         }
@@ -40,7 +40,7 @@ const login = (req, res, next) => {
 
 const validateToken = (req, res, next) => {
   const token = req.body.token || "";
-  jwt.verify(token, env.authSecret, function(err, decoded) {
+  jwt.verify(token, process.env.AUTH_SECRET ? process.env.AUTH_SECRET : env.authSecret, function(err, decoded) {
     return res.status(200).send({ valid: !err });
   });
 };
