@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const { BillingCycles } = require("../models/billingCycles");
-const errorHandler = require("../common/errorHandler");
+const auth = require("../middlewares/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   const billingCycles = await BillingCycles.find({});
   res.json(billingCycles);
 });
 
-router.get("/count", async (req, res) => {
+router.get("/count", auth, async (req, res) => {
   BillingCycles.countDocuments((error, value) => {
     if (error) {
       res.status(500).json({ errors: [error] });
@@ -19,7 +19,7 @@ router.get("/count", async (req, res) => {
   });
 });
 
-router.get("/summary", async (req, res) => {
+router.get("/summary", auth, async (req, res) => {
   BillingCycles.aggregate([
     {
       $project: {
@@ -46,7 +46,7 @@ router.get("/summary", async (req, res) => {
   });
 });
 
-router.get("/detalhes/:id", async (req, res) => {
+router.get("/detalhes/:id", auth, async (req, res) => {
   try {
     const billingCycle = await BillingCycles.findOne({
       _id: req.params.id
@@ -62,7 +62,7 @@ router.get("/detalhes/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const billingCycle = new BillingCycles({
     name: req.body.name,
     month: req.body.month,
@@ -75,7 +75,7 @@ router.post("/", async (req, res) => {
   res.json(billingCycle);
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   const billingCycle = await BillingCycles.updateOne(
     {
       _id: req.params.id
@@ -94,7 +94,7 @@ router.put("/:id", async (req, res) => {
   res.json(billingCycle);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   const billingCycle = await BillingCycles.deleteOne({
     _id: req.params.id
   });

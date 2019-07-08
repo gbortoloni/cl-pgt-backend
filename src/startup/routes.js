@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const queryParser = require("express-query-int");
 
 const billingCycles = require("../routes/billingCycles");
+const authServices = require("../routes/authServices");
 
 module.exports = function(app) {
   app.use(cors());
@@ -13,4 +14,5 @@ module.exports = function(app) {
   app.use(express.json());
   app.use(queryParser());
   app.use("/api/billingCycles", billingCycles);
+  app.use("/api/authServices", authServices);
 };
