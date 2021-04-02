@@ -22,7 +22,7 @@
     "lodash": "^4.17.11",
     "mongoose": "^5.6.2",
     "mongoose-paginate": "^5.0.3",
-    "pm2": "^3.5.1"
+    "pm2": "^4.5.6"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
